@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브코딩 시작 가이드</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f5f5f7;
+    --border: #d2d2d7;
+    --accent: #2d7a00;
+    --accent2: #b08000;
+    --text: #1d1d1f;
+    --muted: #6e6e73;
+    --highlight: #eef7e6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    padding: 80px 40px 60px;
+    max-width: 860px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.8s ease both;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+  }
+
+  .intro {
+    padding: 56px 0 48px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+
+  .intro p {
+    font-size: 1.08rem;
+    color: #1d1d1f;
+    margin-bottom: 20px;
+    max-width: 680px;
+  }
+
+  .intro p:last-child { margin-bottom: 0; }
+
+  .intro-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px 22px;
+    text-decoration: none;
+    margin: 4px 0 24px;
+    transition: opacity 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .intro-btn:hover { opacity: 0.85; }
+
+  .highlight-text {
+    background: #fff3cd;
+    color: #7a5800;
+    padding: 1px 6px;
+    font-weight: 600;
+    font-size: 0.95em;
+  }
+
+  .flow-inline {
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 1rem;
+    color: #1d1d1f;
+  }
+
+  .flow-inline:last-of-type { border-bottom: none; }
+
+  .flow-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    margin-right: 10px;
+    letter-spacing: 0.03em;
+    vertical-align: middle;
+  }
+
+  .intro-start {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #1d1d1f !important;
+    margin-top: 8px !important;
+  }
+
+  .steps {
+    padding: 56px 0;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: #6e6e73;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0 32px;
+    margin-bottom: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .step:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+    padding-top: 4px;
+    opacity: 0.7;
+  }
+
+  .step-content h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .step-content p {
+    font-size: 1rem;
+    color: #1d1d1f;
+    margin-bottom: 16px;
+    line-height: 1.9;
+  }
+
+  .step-content p:last-child { margin-bottom: 0; }
+
+  .tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .tool-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: #1d1d1f;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .tool-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--highlight); }
+
+  .tool-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .tool-chip .arrow { font-size: 10px; opacity: 0.5; margin-left: 4px; }
+
+  .tool-chip.recommended { border-color: var(--accent); background: var(--highlight); }
+  .tool-chip.recommended .dot { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+
+  .rec-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+  }
+
+  .sub-steps {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .sub-step {
+    display: flex;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: #1d1d1f;
+  }
+
+  .sub-step:last-child { border-bottom: none; padding-bottom: 0; }
+  .sub-step:first-child { padding-top: 0; }
+
+  .sub-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+
+  .cta {
+    margin-top: 64px;
+    padding: 48px;
+    border: 1px solid var(--accent);
+    background: var(--highlight);
+    text-align: center;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .cta h2 { font-size: 1.8rem; font-weight: 900; color: var(--accent); margin-bottom: 16px; letter-spacing: -0.02em; }
+
+  .cta p { font-size: 1.05rem; color: #1d1d1f; max-width: 440px; margin: 0 auto 28px; line-height: 1.8; }
+
+  .cta-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .cta-btn.primary { background: var(--accent); color: #ffffff; font-weight: 500; }
+  .cta-btn.primary:hover { background: #3a9e00; }
+  .cta-btn.secondary { border: 1px solid var(--border); color: #1d1d1f; }
+  .cta-btn.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer span { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step:nth-child(1) { animation-delay: 0.05s; }
+  .step:nth-child(2) { animation-delay: 0.1s; }
+  .step:nth-child(3) { animation-delay: 0.15s; }
+  .step:nth-child(4) { animation-delay: 0.2s; }
+
+  @media (max-width: 600px) {
+    header, main { padding-left: 24px; padding-right: 24px; }
+    .step { grid-template-columns: 1fr; gap: 8px; }
+    .step-num { font-size: 1.8rem; }
+    .cta { padding: 32px 24px; }
+    footer { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>바이브코딩 그거 어떻게 하는건데?</h1>
+</header>
+
+<main>
+
+  <section class="intro">
+    <p>바이브코딩을 이미 경험하고 있으신 분이라면 이 문서를 읽을 필요가 없습니다.<br>
+    <strong>바이브코딩 해보라는데, 그거 뭐 어떻게 하는건데?</strong> 하는 분들을 위한 경험 공유 입니다.</p>
+
+    <p>바이브코딩을 한번도 해 보지 않으신 분들이라면 <strong>코딩부터 배포까지 한방에 해결해 주는 플랫폼</strong>을 추천합니다.<br>
+    사용 경험은 ChatGPT와 거의 유사하며 몇줄의 프롬프트만 넣어도 근사한 초안을 완성해 줍니다.</p>
+
+    <a href="https://replit.com" target="_blank" class="intro-btn">Replit 바로가기 ↗</a>
+
+    <p>그런데 이게 좀 <strong>비쌉니다.</strong> 제대로 좀 해보려면 일단 월 구독을 해야하고 <span class="highlight-text">(22달러)</span>, 이 구독에서 제공하는 크레딧은 며칠, 좀 많이 하면 몇시간이면 소모되고 추가 크레딧에 과금이 됩니다.<br>
+    <strong>한달에 20만원 금방 쓰게 됩니다.</strong></p>
+
+    <p>그럴 수는 없는 노릇이니, 일단 한번 맛을 보셨으면 <strong>여러 플랫폼을 교차해 활용하는 방식</strong>을 추천 드립니다.</p>
+
+    <p>웹페이지나 앱을 만든다고 생각해 보시면,<br>
+    <span class="flow-inline"><span class="flow-tag">1) 기획</span> 방향을 설정해 기획하고</span>
+    <span class="flow-inline"><span class="flow-tag">2) 구현</span> 디자인/개발을 통해 구현해서</span>
+    <span class="flow-inline"><span class="flow-tag">3) 배포</span> 남들이 쓸수 있게 배포하는 과정입니다.</span></p>
+
+    <p>바이브코딩은 <strong>1)번을 프롬프트화 시켜서 입력하면 2)번을 자동으로 해주는 과정</strong>입니다.<br>
+    그래서 나온 산출물을 3)번 배포의 과정을 통해서 서비스화 시키는 것이죠. 여기에 각각을 담당하는 툴들이 있어요.</p>
+
+    <p class="intro-start">시작해 보겠습니다.</p>
+  </section>
+
+  <section class="steps">
+    <div class="section-label">Step by Step</div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h2>코드를 보관할 집, GitHub</h2>
+        <p>코드를 관리하는 공간이 필요합니다. 개발자들이 쓰는 그 GitHub, 맞습니다. 여러분도 이제 코딩을 하니 코드를 여기서 관리합니다. 이후 모든 플랫폼이 GitHub에서 코드를 불러오기 때문에 <strong>필수</strong>입니다.</p>
+        <div class="tools">
+          <a href="https://github.com" target="_blank" class="tool-chip recommended">
+            <span class="dot"></span> GitHub <span class="arrow">↗</span>
+          </a>
+        </div>
+        <p class="rec-label" style="margin-top:12px">★ 필수 — 모든 플랫폼의 연동 기반</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h2>바이브코딩 툴 선택</h2>
+        <p>대화 형식으로 요청을 하면 코드를 만들어 GitHub에 넣어주는 도구입니다. 툴은 많습니다. 너무 많으니 취향껏 선택하시면 되지만 추천 드리는 것은 <strong>클로드 코드와 커서 프로</strong>입니다.</p>
+        <p><strong>Cursor Pro</strong>는 비개발자 입문자에게 친숙한 인터페이스를 제공합니다. <strong>Claude Code</strong>는 터미널 기반으로 강력하지만 약간의 진입장벽이 있습니다. 처음엔 Cursor부터 시작해 보세요.</p>
+        <div class="tools">
+          <a href="https://cursor.com" target="_blank" class="tool-chip recommended">
+            <span class="dot"></span> Cursor Pro <span class="arrow">↗</span>
+          </a>
+          <a href="https://claude.ai/code" target="_blank" class="tool-chip">
+            <span class="dot" style="background:var(--muted)"></span> Claude Code <span class="arrow">↗</span>
+          </a>
+          <a href="https://replit.com" target="_blank" class="tool-chip">
+            <span class="dot" style="background:var(--muted)"></span> Replit (입문용) <span class="arrow">↗</span>
+          </a>
+          <a href="https://lovable.dev" target="_blank" class="tool-chip">
+            <span class="dot" style="background:var(--muted)"></span> Lovable <span class="arrow">↗</span>
+          </a>
+          <a href="https://bolt.new" target="_blank" class="tool-chip">
+            <span class="dot" style="background:var(--muted)"></span> Bolt.new <span class="arrow">↗</span>
+          </a>
+        </div>
+        <p class="rec-label">★ 입문자 추천 — Cursor Pro</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h2>가입 · 연동 · 코딩 시작</h2>
+        <p>바이브코딩툴을 선택했으면 가입하고, 필요하면 구독도 하고, 가장 중요한 <strong>Github 계정과 연동</strong>합니다. Github계정과 연동할때 <span class="highlight-text">Repo.</span> 를 선택하라고 할겁니다. Repository이고, 코드의 집합, 즉 우리가 만들 서비스입니다. 그러니 이름은 생각하시는 서비스의 이름으로 지으면 됩니다. <strong>미리 Github에 만들어 놓으셔도 되고 연동하면서 새로 만들수도 있습니다.</strong></p>
+        <div class="sub-steps">
+          <div class="sub-step">
+            <span class="sub-num">① 요청</span>
+            <span>바이브코딩 툴에 대화하듯이 아무거나 요청을 하면</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-num">② 생성</span>
+            <span>코드를 만들어 지정한 Github Repository에 코드를 넣어 줍니다. 그럼 서비스가 만들어진거에요.</span>
+          </div>
+          <div class="sub-step">
+            <span class="sub-num">③ 완료</span>
+            <span>Github에 들어가서 코드 확인하고 그러실 필요 없습니다. 어차피 봐도 모르고요. <strong>끝났습니다 하면 아 끝났구나 하면 됩니다.</strong></span>
+          </div>
+        </div>
+        <p style="margin-top:20px; font-size:1rem; font-weight:700; color:#1d1d1f;">여기까지 하면 코딩은 완료입니다.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h2>배포 — 세상에 공개하기</h2>
+        <p>코딩으로 완성된 서비스를 눈으로 확인하고 배포해서 남들도 써보게 해야겠죠? <strong>Vercel</strong>이라는 배포 툴을 활용합니다. 바이브 코딩 툴에서 그랬던 것처럼 <strong>Github 계정을 연동</strong>합니다. 연동하고 나면 <strong>Github의 Repo. 리스트가 보일거고요.</strong></p>
+        <p><span class="highlight-text">배포(Deploy) 버튼</span>을 누르면 배포가 됩니다. 배포된 URL을 누르면 바이브코딩 툴에 요청해 만든 서비스가 짠 하고 나올거에요.</p>
+        <p style="font-weight:700; color:#1d1d1f;">끝났습니다.</p>
+        <div class="tools">
+          <a href="https://vercel.com" target="_blank" class="tool-chip recommended">
+            <span class="dot"></span> Vercel <span class="arrow">↗</span>
+          </a>
+          <a href="https://netlify.com" target="_blank" class="tool-chip">
+            <span class="dot" style="background:var(--muted)"></span> Netlify (대안) <span class="arrow">↗</span>
+          </a>
+        </div>
+        <p class="rec-label">★ GitHub 연동 → Deploy 버튼 → URL 완성</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="cta">
+    <h2>겁먹지 말고, 일단 시작.</h2>
+    <p>간단히(?) 설명했지만 이 과정들을 진행하다 보면 여러 문제들이 생길겁니다.<br>
+    문제가 생기면 AI툴에 바로 질문하고 캡쳐를 보내고 해보세요. 빠르게 해결될겁니다. 이 과정을 경험하는 자체가 바이브 코딩의 핵심이기도 합니다.</p>
+    <div class="cta-links">
+      <a href="https://github.com" target="_blank" class="cta-btn primary">GitHub 시작하기</a>
+      <a href="https://cursor.com" target="_blank" class="cta-btn secondary">Cursor 둘러보기</a>
+      <a href="https://vercel.com" target="_blank" class="cta-btn secondary">Vercel 배포하기</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span>바이브코딩 입문 가이드</span>
+  <span>© 2025 — 경험 공유 문서</span>
+</footer>
+
+</body>
+</html>
